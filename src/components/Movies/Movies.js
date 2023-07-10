@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { fetchMedia, fetchTrendingMedia } from '../../services/MovieService';
 
-const Movies = ({ endpoint }) => {
+const Movies = ({ endpoint, isTrending }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const fetchMedia = async () => {
+    const fetchData = async () => {
       try {
-        const apiKey = 'f5f42920d31e693ff3c7c36e87e03dd4';
-        const response = await fetch(`https://api.themoviedb.org/3/discover/${endpoint}?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${apiKey}`);
-        const data = await response.json();
-        setMovies(data.results);
+        let data;
+        if(isTrending) {
+          data = await fetchTrendingMedia();
+        } else{
+          data = await fetchMedia(endpoint);
+        }
+        setMovies(data);
       } catch (error) {
         console.log(`Error fetching ${endpoint}:`, error);
       }
     };
 
-    fetchMedia();
-  }, [endpoint]);
+    fetchData();
+  }, [endpoint, isTrending]);
 
   return (
     <div>
