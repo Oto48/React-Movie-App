@@ -9,5 +9,13 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        ".w-poster": {
+          width: "calc(25% - 30px)",
+        },
+      });
+    },
+  ],
 };

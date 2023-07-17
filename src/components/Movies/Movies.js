@@ -3,6 +3,7 @@ import { fetchMedia, fetchTrendingMedia } from "../../services/MovieService";
 
 const Movies = ({ endpoint, isTrending }) => {
   const [movies, setMovies] = useState([]);
+  const baseURL = "https://image.tmdb.org/t/p/original";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +14,7 @@ const Movies = ({ endpoint, isTrending }) => {
         } else {
           data = await fetchMedia(endpoint);
         }
+        console.log(data);
         setMovies(data);
       } catch (error) {
         console.log(`Error fetching ${endpoint}:`, error);
@@ -23,12 +25,22 @@ const Movies = ({ endpoint, isTrending }) => {
   }, [endpoint, isTrending]);
 
   return (
-    <div>
-      <ul>
+    <div className="flex flex-wrap gap-10 w-full">
+      {movies.map((movie) => (
+        <div key={movie.id} className="w-poster">
+          <div className="h-[220px]">
+            <img
+              className="w-full h-full rounded-lg object-cover object-center"
+              src={baseURL + (movie.backdrop_path || movie.poster_path)}
+            />
+          </div>
+        </div>
+      ))}
+      {/* <ul>
         {movies.map((movie) => (
           <li key={movie.id}>{movie.title || movie.name}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
