@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { fetchMedia, fetchTrendingMedia } from '../../services/MovieService';
+import React, { useEffect, useState } from "react";
+import { fetchMedia, fetchTrendingMedia } from "../../services/MovieService";
 
 const Movies = ({ endpoint, isTrending }) => {
   const [movies, setMovies] = useState([]);
@@ -8,9 +8,9 @@ const Movies = ({ endpoint, isTrending }) => {
     const fetchData = async () => {
       try {
         let data;
-        if(isTrending) {
+        if (isTrending) {
           data = await fetchTrendingMedia();
-        } else{
+        } else {
           data = await fetchMedia(endpoint);
         }
         setMovies(data);
