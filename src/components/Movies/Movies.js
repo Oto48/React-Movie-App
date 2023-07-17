@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchMedia, fetchTrendingMedia } from "../../services/MovieService";
+import altImg from "../../assets/images/alt-img.jpg";
 
 const Movies = ({ endpoint, isTrending }) => {
   const [movies, setMovies] = useState([]);
@@ -32,6 +33,7 @@ const Movies = ({ endpoint, isTrending }) => {
             <img
               className="w-full h-full rounded-lg object-cover object-center"
               src={baseURL + (movie.backdrop_path || movie.poster_path)}
+              alt={altImg}
             />
           </div>
         </div>
