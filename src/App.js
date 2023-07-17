@@ -7,9 +7,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 function App() {
   return (
     <Router>
-      <div>
+      <div className="bg-darkBlue min-h-screen text-white flex gap-10 p-8">
         <Navbar />
-        <h1>Trending Movies and TV Shows</h1>
         <Routes>
           <Route path="/" element={<Navigate to="/movies" />} />
           <Route path="/trending" element={<Movies isTrending={true} />} />
