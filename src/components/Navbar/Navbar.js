@@ -6,21 +6,18 @@ import TVShowIcon from "../../assets/svg/TVShowIcon.js";
 
 const Navbar = () => {
   return (
-    <div className="navbar">
-      <nav>
-        <ul>
-          <li>
+    <div className="h-screen w-24 pb-16">
+      <nav className="bg-semiDarkBlue h-full rounded-2xl py-8">
+        <ul className="flex flex-col gap-10">
+          <Link to="/trending" className="flex justify-center">
             <TrendingIcon />
+          </Link>
+          <Link to="/movies" className="flex justify-center">
             <MovieIcon />
+          </Link>
+          <Link to="/tvshows" className="flex justify-center">
             <TVShowIcon />
-            <Link to="/movies">Movies</Link>
-          </li>
-          <li>
-            <Link to="/tvshows">TV Shows</Link>
-          </li>
-          <li>
-            <Link to="/trending">Trending</Link>
-          </li>
+          </Link>
         </ul>
       </nav>
     </div>
