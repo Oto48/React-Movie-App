@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import TrendingIcon from "../../assets/svg/TrendingIcon.js";
+import MovieIcon from "../../assets/svg/MovieIcon.js";
+import TVShowIcon from "../../assets/svg/TVShowIcon.js";
 
 const Navbar = () => {
   return (
@@ -7,6 +10,9 @@ const Navbar = () => {
       <nav>
         <ul>
           <li>
+            <TrendingIcon />
+            <MovieIcon />
+            <TVShowIcon />
             <Link to="/movies">Movies</Link>
           </li>
           <li>
