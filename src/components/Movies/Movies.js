@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchMedia, fetchTrendingMedia } from "../../services/MovieService";
 import altImg from "../../assets/images/alt-img.jpg";
+import movieScoreIcon from "../../assets/images/movie-score-icon.png";
 
 const Movies = ({ endpoint, isTrending }) => {
   const [movies, setMovies] = useState([]);
@@ -26,7 +27,7 @@ const Movies = ({ endpoint, isTrending }) => {
   }, [endpoint, isTrending]);
 
   return (
-    <div className="flex flex-wrap gap-10 w-full">
+    <div className="flex flex-1 flex-wrap gap-10 w-full">
       {movies.map((movie) => (
         <div key={movie.id} className="w-poster">
           <div className="h-[220px]">
@@ -36,13 +37,12 @@ const Movies = ({ endpoint, isTrending }) => {
               alt={altImg}
             />
           </div>
+          <div className="flex">
+            <img src={movieScoreIcon} className="w-[15px]" alt="" />
+          </div>
+          <p>{movie.title || movie.name}</p>
         </div>
       ))}
-      {/* <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>{movie.title || movie.name}</li>
-        ))}
-      </ul> */}
     </div>
   );
 };
