@@ -11,6 +11,9 @@ module.exports = {
         darkBlue: "#10141E",
         semiDarkBlue: "#161D2F",
       },
+      screens: {
+        xl: { max: "1400px" },
+      },
     },
   },
   plugins: [

@@ -40,29 +40,29 @@ const Movies = ({ endpoint, isTrending }) => {
         const rating = movie.vote_average.toFixed(1);
 
         return (
-          <div key={movie.id} className="w-poster">
-            <div className="h-[220px]">
+          <div key={movie.id} className="w-poster flex flex-col gap-2">
+            <div className="h-52 xl:h-44">
               <img className="w-full h-full rounded-lg object-cover object-center" src={posterPath} alt={altImg} />
             </div>
-            <div className="flex gap-2 items-center text-secondary">
+            <div className="flex gap-2 items-center text-secondary text-sm font-light">
               <p>{releaseYear}</p>
               <div className="w-1 h-1 bg-white opacity-50 rounded-full"></div>
               {isMovie ? (
-                <div className="flex gap-2">
-                  <MovieIcon fill={"#c3c4c7"} />
+                <div className="flex gap-2 items-center">
+                  <MovieIcon fill={"#c3c4c7"} width={"12px"} height={"12px"} />
                   <p>Movie</p>
                 </div>
               ) : (
-                <div className="flex gap-2">
-                  <TVShowIcon fill={"#c3c4c7"} />
+                <div className="flex gap-2 items-center">
+                  <TVShowIcon fill={"#c3c4c7"} width={"12px"} height={"12px"} />
                   <p>TV Series</p>
                 </div>
               )}
               <div className="w-1 h-1 bg-white opacity-50 rounded-full"></div>
-              <img src={movieScoreIcon} className="h-[20px]" alt="" />
+              <img src={movieScoreIcon} className="h-[12px]" alt="" />
               <p>{rating}</p>
             </div>
-            <p>{title}</p>
+            <p className="font-medium text-lg">{title}</p>
           </div>
         );
       })}
