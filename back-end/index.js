@@ -1,5 +1,4 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
 const User = require("./models/user");
 const connectToDatabase = require("./db/connection");
 
@@ -12,22 +11,17 @@ app.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Check if the username or email is already taken
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) {
+    if (!username || !email || !password) {
       return res
-        .status(409)
-        .json({ message: "Username or email is already taken." });
+        .status(400)
+        .json({ message: "Please provide username, email, and password." });
     }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user record in the database
     const newUser = new User({
       username,
       email,
-      password: hashedPassword,
+      password,
     });
 
     await newUser.save();
@@ -35,9 +29,7 @@ app.post("/register", async (req, res) => {
     res.status(201).json({ message: "User registered successfully." });
   } catch (error) {
     console.error("Error in user registration:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to register user.", error: error.message });
+    res.status(500).json({ message: "Internal server error." });
   }
 });
 
