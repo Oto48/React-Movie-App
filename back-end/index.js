@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const User = require("./models/user");
 const connectToDatabase = require("./db/connection");
 
@@ -6,6 +7,7 @@ const app = express();
 const port = 5000;
 
 app.use(express.json());
+app.use(cors()); // Use the cors middleware
 
 app.post("/register", async (req, res) => {
   try {

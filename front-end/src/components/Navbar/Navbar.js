@@ -18,6 +18,9 @@ const Navbar = () => {
           <Link to="/tvshows" className="flex justify-center">
             <TVShowIcon />
           </Link>
+          <Link to="/register" className="flex justify-center">
+            <p>register</p>
+          </Link>
         </ul>
       </nav>
     </div>
