@@ -10,6 +10,7 @@ module.exports = {
         secondary: "#c3c4c7",
         darkBlue: "#10141E",
         semiDarkBlue: "#161D2F",
+        greyishBlue: "#5A698F",
       },
       screens: {
         xl: { max: "1400px" },

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Logo from "../../assets/svg/Logo";
 
 const AuthForm = () => {
   const [formData, setFormData] = useState({
@@ -63,34 +64,60 @@ const AuthForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" name="username" value={formData.username} onChange={handleChange} />
-      </label>
-      {formErrors.username && <p>{formErrors.username}</p>}
+    <div className="w-full flex flex-col items-center gap-20 mt-20">
+      <Logo />
+      <form onSubmit={handleSubmit} className="p-8 bg-semiDarkBlue flex flex-col w-[400px] rounded-[20px] font-light">
+        <p className="capitalize">sign up</p>
+        <div className="border-b-[1px] border-greyishBlue">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange}
+            className="bg-semiDarkBlue focus:outline-none mb-[18px]"
+          />
+        </div>
+        {formErrors.username && <p>{formErrors.username}</p>}
 
-      <label>
-        Email:
-        <input type="email" name="email" value={formData.email} onChange={handleChange} />
-      </label>
-      {formErrors.email && <p>{formErrors.email}</p>}
-      <br />
+        <div className="border-b-[1px] border-greyishBlue">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email address"
+            value={formData.email}
+            onChange={handleChange}
+            className="bg-semiDarkBlue focus:outline-none my-[18px]"
+          />
+        </div>
+        {formErrors.email && <p>{formErrors.email}</p>}
 
-      <label>
-        Password:
-        <input type="password" name="password" value={formData.password} onChange={handleChange} />
-      </label>
-      {formErrors.password && <p>{formErrors.password}</p>}
+        <div className="border-b-[1px] border-greyishBlue">
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="bg-semiDarkBlue focus:outline-none my-[18px]"
+          />
+        </div>
+        {formErrors.password && <p>{formErrors.password}</p>}
 
-      <label>
-        Repeat Password:
-        <input type="password" name="repeatPassword" value={formData.repeatPassword} onChange={handleChange} />
-      </label>
-      {formErrors.repeatPassword && <p>{formErrors.repeatPassword}</p>}
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+        <div className="border-b-[1px] border-greyishBlue">
+          <input
+            type="password"
+            name="repeatPassword"
+            placeholder="Repeat password"
+            value={formData.repeatPassword}
+            onChange={handleChange}
+            className="bg-semiDarkBlue focus:outline-none my-[18px]"
+          />
+        </div>
+        {formErrors.repeatPassword && <p>{formErrors.repeatPassword}</p>}
+        <button type="submit">Create an account</button>
+      </form>
+    </div>
   );
 };
 
