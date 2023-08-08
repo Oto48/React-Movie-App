@@ -15,7 +15,8 @@ function App() {
           <Route path="/trending" element={<Movies isTrending={true} />} />
           <Route path="/movies" element={<Movies endpoint={"movie"} />} />
           <Route path="/tvshows" element={<Movies endpoint={"tv"} />} />
-          <Route path="/register" element={<AuthForm />} />
+          <Route path="/login" element={<AuthForm isLogin={true} />} />
+          <Route path="/register" element={<AuthForm isLogin={false} />} />
         </Routes>
       </div>
     </Router>

@@ -18,7 +18,6 @@ const Movies = ({ endpoint, isTrending }) => {
         } else {
           data = await fetchMedia(endpoint);
         }
-        console.log(data);
         setMovies(data);
       } catch (error) {
         console.log(`Error fetching ${endpoint}:`, error);

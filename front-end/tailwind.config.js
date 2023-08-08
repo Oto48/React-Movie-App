@@ -11,6 +11,7 @@ module.exports = {
         darkBlue: "#10141E",
         semiDarkBlue: "#161D2F",
         greyishBlue: "#5A698F",
+        red: "#FC4747",
       },
       screens: {
         xl: { max: "1400px" },
