@@ -5,16 +5,16 @@ import MovieIcon from "../../assets/svg/MovieIcon.js";
 import TVShowIcon from "../../assets/svg/TVShowIcon.js";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../AuthContext"; // Import the useAuth hook
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useAuth(); // Use the useAuth hook
 
   useEffect(() => {
     fetchUser();
   }, []);
 
   const fetchUser = async () => {
-    console.log("ok");
     try {
       const response = await axios.get("http://localhost:5000/user", {
         withCredentials: true,

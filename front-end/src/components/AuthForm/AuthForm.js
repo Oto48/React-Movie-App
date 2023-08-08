@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Logo from "../../assets/svg/Logo";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext"; // Import the useAuth hook
 
 const AuthForm = ({ isLogin }) => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const AuthForm = ({ isLogin }) => {
     repeatPassword: "",
   });
 
+  const { setUser } = useAuth();
   const [formErrors, setFormErrors] = useState({});
 
   const navigate = useNavigate(); // Get navigation
@@ -55,8 +57,8 @@ const AuthForm = ({ isLogin }) => {
       const userResponse = await axios.get("http://localhost:5000/user", {
         withCredentials: true,
       });
-      console.log(userResponse.data);
 
+      setUser(userResponse.data.user);
       navigate("/trending");
     } catch (error) {
       console.error("Error during login:", error);
