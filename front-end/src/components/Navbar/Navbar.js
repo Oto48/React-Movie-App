@@ -1,36 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import TrendingIcon from "../../assets/svg/TrendingIcon.js";
 import MovieIcon from "../../assets/svg/MovieIcon.js";
 import TVShowIcon from "../../assets/svg/TVShowIcon.js";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 import axios from "axios";
-import { useAuth } from "../../AuthContext"; // Import the useAuth hook
 
 const Navbar = () => {
-  const { user, setUser } = useAuth(); // Use the useAuth hook
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/user", {
-        withCredentials: true,
-      });
-      setUser(response.data.user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-    }
-  };
+  const { user, setUser } = useAuth();
 
   const location = useLocation();
   const isRegistrationPage = location.pathname === "/register";
   const isLoginPage = location.pathname === "/login";
   if (isRegistrationPage || isLoginPage) {
-    return null; // Don't render the Navbar on the registration page
+    return null; // Don't render the Navbar on the login page
   }
+
+  const logout = async () => {
+    try {
+      await axios.post("http://localhost:5000/logout", null, {
+        withCredentials: true,
+      });
+      setUser(null);
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
 
   return (
     <div className="h-screen w-24 pb-16">
@@ -46,9 +42,15 @@ const Navbar = () => {
           <Link to="/tvshows" className="flex justify-center">
             <TVShowIcon />
           </Link>
-          <Link to="/login" className="flex justify-center">
-            <p>Login</p>
-          </Link>
+          {user ? (
+            <button onClick={logout} className="flex justify-center">
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" className="flex justify-center">
+              <p>Login</p>
+            </Link>
+          )}
         </ul>
       </nav>
     </div>

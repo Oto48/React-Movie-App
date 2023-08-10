@@ -16,9 +16,7 @@ app.use(cookieParser());
 
 // Helper function to generate a JWT token
 const generateToken = (user) => {
-  const token = jwt.sign({ userId: user._id }, "your_secret_key_here", {
-    expiresIn: "1h", // Set the token expiration time as desired
-  });
+  const token = jwt.sign({ userId: user._id }, "mysecretkey123");
   return token;
 };
 
@@ -81,6 +79,21 @@ app.post("/login", async (req, res) => {
     res.status(200).json({ message: "Login successful." });
   } catch (error) {
     console.error("Error during login:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+app.post("/logout", (req, res) => {
+  try {
+    res.clearCookie("authToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Error during logout:", error);
     res.status(500).json({ message: "Internal server error." });
   }
 });
