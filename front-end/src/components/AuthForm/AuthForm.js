@@ -38,6 +38,13 @@ const AuthForm = ({ isLogin }) => {
         // Make the API call to the backend server
         const response = await axios.post("http://localhost:5000/register", dataWithoutRepeatPassword);
         console.log(response.data);
+        setFormData({
+          username: "",
+          email: "",
+          password: "",
+          repeatPassword: "",
+        });
+        navigate("/login");
       } catch (error) {
         console.error("Error during registration:", error);
       }
