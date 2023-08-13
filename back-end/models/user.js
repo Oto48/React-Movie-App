@@ -35,6 +35,18 @@ const userSchema = new mongoose.Schema({
         "Invalid password format. Password must have at least 3 characters.",
     },
   },
+  bookmarkedMedia: [
+    {
+      mediaId: {
+        type: Number,
+        required: true,
+      },
+      isMovie: {
+        type: Boolean,
+        required: true,
+      },
+    },
+  ],
 });
 
 // Pre-save hook to hash the password before saving to the database

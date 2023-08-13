@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 
 const connectToDatabase = require("./db/connection");
 const authRoutes = require("./routes/auth");
+const mediaRoutes = require("./routes/media");
 
 const app = express();
 const port = 5000;
@@ -13,6 +14,7 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // Use th
 app.use(cookieParser());
 
 app.use("/", authRoutes);
+app.use("/", mediaRoutes);
 
 // Start the server and listen on the specified port
 const startServer = async () => {
