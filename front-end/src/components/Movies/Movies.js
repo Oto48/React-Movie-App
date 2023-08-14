@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { fetchMedia, fetchTrendingMedia } from "../../services/MovieService";
+import { useAuth } from "../../AuthContext";
 import altImg from "../../assets/images/alt-img.jpg";
 import movieScoreIcon from "../../assets/images/movie-score-icon.png";
 import MovieIcon from "../../assets/svg/MovieIcon";
 import TVShowIcon from "../../assets/svg/TVShowIcon";
+import BookmarkLogo from "../../assets/svg/BookmarkLogo";
 import axios from "axios";
 
 const Movies = ({ endpoint, isTrending }) => {
   const [movies, setMovies] = useState([]);
   const baseURL = "https://image.tmdb.org/t/p/original";
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +37,10 @@ const Movies = ({ endpoint, isTrending }) => {
         withCredentials: true,
       });
 
+      const updatedBookmarkedMedia = [...user.bookmarkedMedia, { mediaId, isMovie }];
+      const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
+      setUser(updatedUser);
+
       setMovies((prevMovies) =>
         prevMovies.map((movie) => (movie.id === mediaId ? { ...movie, bookmarked: true } : movie))
       );
@@ -47,6 +54,12 @@ const Movies = ({ endpoint, isTrending }) => {
       await axios.delete(`http://localhost:5000/bookmark/${mediaId}`, {
         withCredentials: true,
       });
+
+      const updatedBookmarkedMedia = user.bookmarkedMedia.filter(
+        (bookmark) => !(bookmark.mediaId === parseInt(mediaId))
+      );
+      const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
+      setUser(updatedUser);
     } catch (error) {
       console.error("Error removing bookmark:", error);
     }
@@ -63,8 +76,22 @@ const Movies = ({ endpoint, isTrending }) => {
         const isMovie = movie.title;
         const rating = movie.vote_average.toFixed(1);
 
+        const isBookmarked = user?.bookmarkedMedia.some((item) => item.mediaId === movie.id);
+
         return (
-          <div key={movie.id} className="w-poster flex flex-col gap-2" onClick={() => handleRemoveBookmark(movie.id)}>
+          <div key={movie.id} className="w-poster flex flex-col gap-2 relative">
+            {isBookmarked ? (
+              <div className="absolute top-4 right-6 cursor-pointer" onClick={() => handleRemoveBookmark(movie.id)}>
+                <BookmarkLogo bookmarked={true} fill={"white"} />
+              </div>
+            ) : (
+              <div
+                className="absolute top-4 right-6 cursor-pointer"
+                onClick={() => handleBookmark(movie.id, movie.media_type)}
+              >
+                <BookmarkLogo />
+              </div>
+            )}
             <div className="h-52 xl:h-44">
               <img className="w-full h-full rounded-lg object-cover object-center" src={posterPath} alt={altImg} />
             </div>
