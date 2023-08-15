@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const API_KEY = "f5f42920d31e693ff3c7c36e87e03dd4";
 
 export const fetchMedia = async (mediaType) => {
@@ -21,5 +23,33 @@ export const fetchTrendingMedia = async () => {
   } catch (error) {
     console.log("Error fetching trending movies:", error);
     throw error;
+  }
+};
+
+export const addBookmark = async (mediaId, isMovie, user, setUser) => {
+  try {
+    await axios.post(`http://localhost:5000/bookmark/${mediaId}/${isMovie}`, null, {
+      withCredentials: true,
+    });
+
+    const updatedBookmarkedMedia = [...user.bookmarkedMedia, { mediaId, isMovie }];
+    const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
+    setUser(updatedUser);
+  } catch (error) {
+    console.error("Error bookmarking movie:", error);
+  }
+};
+
+export const removeBookmark = async (mediaId, user, setUser) => {
+  try {
+    await axios.delete(`http://localhost:5000/bookmark/${mediaId}`, {
+      withCredentials: true,
+    });
+
+    const updatedBookmarkedMedia = user.bookmarkedMedia.filter((bookmark) => !(bookmark.mediaId === parseInt(mediaId)));
+    const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
+    setUser(updatedUser);
+  } catch (error) {
+    console.error("Error removing bookmark:", error);
   }
 };

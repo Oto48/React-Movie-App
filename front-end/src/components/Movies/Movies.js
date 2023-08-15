@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { fetchMedia, fetchTrendingMedia } from "../../services/MovieService";
+import { fetchMedia, fetchTrendingMedia, addBookmark, removeBookmark } from "../../services/MovieService";
 import { useAuth } from "../../AuthContext";
 import altImg from "../../assets/images/alt-img.jpg";
 import movieScoreIcon from "../../assets/images/movie-score-icon.png";
 import MovieIcon from "../../assets/svg/MovieIcon";
 import TVShowIcon from "../../assets/svg/TVShowIcon";
 import BookmarkLogo from "../../assets/svg/BookmarkLogo";
-import axios from "axios";
 
 const Movies = ({ endpoint, isTrending }) => {
   const [movies, setMovies] = useState([]);
@@ -31,38 +30,12 @@ const Movies = ({ endpoint, isTrending }) => {
     fetchData();
   }, [endpoint, isTrending]);
 
-  const handleBookmark = async (mediaId, isMovie) => {
-    try {
-      await axios.post(`http://localhost:5000/bookmark/${mediaId}/${isMovie}`, null, {
-        withCredentials: true,
-      });
-
-      const updatedBookmarkedMedia = [...user.bookmarkedMedia, { mediaId, isMovie }];
-      const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
-      setUser(updatedUser);
-
-      setMovies((prevMovies) =>
-        prevMovies.map((movie) => (movie.id === mediaId ? { ...movie, bookmarked: true } : movie))
-      );
-    } catch (error) {
-      console.error("Error bookmarking movie:", error);
-    }
+  const addBookmarkAction = (mediaId, isMovie) => {
+    addBookmark(mediaId, isMovie, user, setUser);
   };
 
-  const handleRemoveBookmark = async (mediaId) => {
-    try {
-      await axios.delete(`http://localhost:5000/bookmark/${mediaId}`, {
-        withCredentials: true,
-      });
-
-      const updatedBookmarkedMedia = user.bookmarkedMedia.filter(
-        (bookmark) => !(bookmark.mediaId === parseInt(mediaId))
-      );
-      const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
-      setUser(updatedUser);
-    } catch (error) {
-      console.error("Error removing bookmark:", error);
-    }
+  const removeBookmarkAction = (mediaId) => {
+    removeBookmark(mediaId, user, setUser);
   };
 
   return (
@@ -81,13 +54,13 @@ const Movies = ({ endpoint, isTrending }) => {
         return (
           <div key={movie.id} className="w-poster flex flex-col gap-2 relative">
             {isBookmarked ? (
-              <div className="absolute top-4 right-6 cursor-pointer" onClick={() => handleRemoveBookmark(movie.id)}>
+              <div className="absolute top-4 right-6 cursor-pointer" onClick={() => removeBookmarkAction(movie.id)}>
                 <BookmarkLogo bookmarked={true} fill={"white"} />
               </div>
             ) : (
               <div
                 className="absolute top-4 right-6 cursor-pointer"
-                onClick={() => handleBookmark(movie.id, movie.media_type)}
+                onClick={() => addBookmarkAction(movie.id, movie.media_type)}
               >
                 <BookmarkLogo />
               </div>
