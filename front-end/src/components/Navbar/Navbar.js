@@ -6,6 +6,7 @@ import TVShowIcon from "../../assets/svg/TVShowIcon.js";
 import BookmarkedMedia from "../../assets/svg/BookmarkedMedia.js";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
+import Logo from "../../assets/svg/Logo";
 import axios from "axios";
 
 const Navbar = () => {
@@ -31,9 +32,11 @@ const Navbar = () => {
 
   return (
     <div className="h-screen w-24 pb-16">
-      <nav className="bg-semiDarkBlue h-full rounded-2xl py-8">
+      <nav className="bg-semiDarkBlue h-full rounded-2xl py-8 flex flex-col justify-between items-center">
         <ul className="flex flex-col gap-10">
-          {user && <li>Welcome, {user.username}!</li>}
+          <Link to="/trending" className="flex justify-center mb-9">
+            <Logo />
+          </Link>
           <Link to="/trending" className="flex justify-center">
             <TrendingIcon />
           </Link>
@@ -43,19 +46,21 @@ const Navbar = () => {
           <Link to="/tvshows" className="flex justify-center">
             <TVShowIcon />
           </Link>
-          <Link to="/bookmarked" className="flex justify-center">
-            <BookmarkedMedia />
-          </Link>
-          {user ? (
-            <button onClick={logout} className="flex justify-center">
-              Logout
-            </button>
-          ) : (
-            <Link to="/login" className="flex justify-center">
-              <p>Login</p>
+          {user && (
+            <Link to="/bookmarked" className="flex justify-center">
+              <BookmarkedMedia />
             </Link>
           )}
         </ul>
+        {user ? (
+          <div className="w-10 h-10 cursor-pointer border-[1px] border-white rounded-full" onClick={logout}>
+            <img className="rounded-full" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png" />
+          </div>
+        ) : (
+          <Link to="/login" className="w-10 h-10 border-[1px] border-white rounded-full">
+            <img className="rounded-full" src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_640.png" />
+          </Link>
+        )}
       </nav>
     </div>
   );
