@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { fetchMedia, fetchTrendingMedia, addBookmark, removeBookmark } from "../../services/MovieService";
+import {
+  fetchMedia,
+  fetchTrendingMedia,
+  fetchBookmarkedMedia,
+  addBookmark,
+  removeBookmark,
+} from "../../services/MovieService";
 import { useAuth } from "../../AuthContext";
 import altImg from "../../assets/images/alt-img.jpg";
 import movieScoreIcon from "../../assets/images/movie-score-icon.png";
@@ -7,7 +13,7 @@ import MovieIcon from "../../assets/svg/MovieIcon";
 import TVShowIcon from "../../assets/svg/TVShowIcon";
 import BookmarkLogo from "../../assets/svg/BookmarkLogo";
 
-const Movies = ({ endpoint, isTrending }) => {
+const Movies = ({ endpoint, isTrending, isBookmarked }) => {
   const [movies, setMovies] = useState([]);
   const baseURL = "https://image.tmdb.org/t/p/original";
   const { user, setUser } = useAuth();
@@ -18,17 +24,23 @@ const Movies = ({ endpoint, isTrending }) => {
         let data;
         if (isTrending) {
           data = await fetchTrendingMedia();
+          setMovies(data);
+        } else if (isBookmarked) {
+          if (user) {
+            data = await fetchBookmarkedMedia(user);
+            setMovies(data);
+          }
         } else {
           data = await fetchMedia(endpoint);
+          setMovies(data);
         }
-        setMovies(data);
       } catch (error) {
         console.log(`Error fetching ${endpoint}:`, error);
       }
     };
 
     fetchData();
-  }, [endpoint, isTrending]);
+  }, [endpoint, isTrending, isBookmarked, user]);
 
   const addBookmarkAction = (mediaId, isMovie) => {
     addBookmark(mediaId, isMovie, user, setUser);

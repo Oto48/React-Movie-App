@@ -26,6 +26,25 @@ export const fetchTrendingMedia = async () => {
   }
 };
 
+export const fetchBookmarkedMedia = async (user) => {
+  if (user?.bookmarkedMedia) {
+    try {
+      const promises = user.bookmarkedMedia.map(async (media) => {
+        const mediaType = media.isMovie ? "movie" : "tv";
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/${mediaType}/${media.mediaId}?api_key=${API_KEY}`
+        );
+        return response.data;
+      });
+
+      const data = await Promise.all(promises);
+      return data;
+    } catch (error) {
+      console.error("Error fetching bookmarked media:", error);
+    }
+  }
+};
+
 export const addBookmark = async (mediaId, isMovie, user, setUser) => {
   try {
     await axios.post(`http://localhost:5000/bookmark/${mediaId}/${isMovie}`, null, {

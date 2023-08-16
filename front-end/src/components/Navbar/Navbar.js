@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import TrendingIcon from "../../assets/svg/TrendingIcon.js";
 import MovieIcon from "../../assets/svg/MovieIcon.js";
 import TVShowIcon from "../../assets/svg/TVShowIcon.js";
+import BookmarkedMedia from "../../assets/svg/BookmarkedMedia.js";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 import axios from "axios";
@@ -41,6 +42,9 @@ const Navbar = () => {
           </Link>
           <Link to="/tvshows" className="flex justify-center">
             <TVShowIcon />
+          </Link>
+          <Link to="/bookmarked" className="flex justify-center">
+            <BookmarkedMedia />
           </Link>
           {user ? (
             <button onClick={logout} className="flex justify-center">
