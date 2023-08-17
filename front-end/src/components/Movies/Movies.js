@@ -6,6 +6,7 @@ import {
   addBookmark,
   removeBookmark,
 } from "../../services/MovieService";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 import altImg from "../../assets/images/alt-img.jpg";
 import movieScoreIcon from "../../assets/images/movie-score-icon.png";
@@ -16,7 +17,8 @@ import BookmarkLogo from "../../assets/svg/BookmarkLogo";
 const Movies = ({ endpoint, isTrending, isBookmarked }) => {
   const [movies, setMovies] = useState([]);
   const baseURL = "https://image.tmdb.org/t/p/original";
-  const { user, setUser } = useAuth();
+  const { user, setUser, isLoading } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +31,8 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
           if (user) {
             data = await fetchBookmarkedMedia(user);
             setMovies(data);
+          } else {
+            navigate("/login");
           }
         } else {
           data = await fetchMedia(endpoint);
@@ -39,8 +43,10 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
       }
     };
 
-    fetchData();
-  }, [endpoint, isTrending, isBookmarked, user]);
+    if (!isLoading) {
+      fetchData();
+    }
+  }, [endpoint, isTrending, isBookmarked, user, isLoading, navigate]);
 
   const addBookmarkAction = (mediaId, isMovie) => {
     addBookmark(mediaId, isMovie, user, setUser);

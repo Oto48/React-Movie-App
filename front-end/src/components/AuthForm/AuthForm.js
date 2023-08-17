@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Logo from "../../assets/svg/Logo";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,12 +13,17 @@ const AuthForm = ({ isLogin }) => {
   });
 
   const [formErrors, setFormErrors] = useState({});
-
   const [invalid, setInvalid] = useState(false);
+  const { user, setUser, isLoading } = useAuth();
+  const navigate = useNavigate();
 
-  const { setUser } = useAuth();
-
-  const navigate = useNavigate(); // Get navigation
+  useEffect(() => {
+    if (!isLoading) {
+      if (user) {
+        navigate("/trending");
+      }
+    }
+  }, [user, isLoading, navigate]);
 
   // Function to update form field values
   const handleChange = (event) => {

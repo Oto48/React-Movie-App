@@ -6,15 +6,30 @@ import { useAuth } from "../../AuthContext";
 
 const Profile = () => {
   const [selectedImage, setSelectedImage] = useState("");
-  const { user, setUser } = useAuth();
+  const { user, setUser, isLoading } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      fetchImage();
-    }
-  }, [user]);
+    const fetchImage = async () => {
+      try {
+        const imageURL = `http://localhost:5000/images/${user.userImage}`;
+        setSelectedImage(imageURL);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
 
-  const handleImageUpload = async (event) => {
+    if (!isLoading) {
+      if (user) {
+        fetchImage();
+      }
+      if (!user) {
+        navigate("/login");
+      }
+    }
+  }, [user, isLoading, navigate]);
+
+  const imageUpload = async (event) => {
     const imageFile = event.target.files[0];
     if (imageFile) {
       const newImageName = `${imageFile.name.split(".")[0]}-${user.username}.${imageFile.name.split(".")[1]}`;
@@ -25,24 +40,18 @@ const Profile = () => {
         await axios.post("http://localhost:5000/upload", formData, {
           withCredentials: true,
         });
+
+        const updatedUser = { ...user, userImage: newImageName };
+        setUser(updatedUser);
       } catch (error) {
         console.error("Error uploading image:", error);
       }
     }
   };
 
-  const fetchImage = async () => {
-    try {
-      const imageURL = `http://localhost:5000/images/${user.userImage}`;
-      setSelectedImage(imageURL);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
-
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      <input type="file" accept="image/*" onChange={imageUpload} />
       <img src={selectedImage} alt="Profile" />
     </div>
   );

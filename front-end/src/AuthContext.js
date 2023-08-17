@@ -9,6 +9,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Add this line
 
   const fetchUser = async () => {
     try {
@@ -18,6 +19,8 @@ export const AuthProvider = ({ children }) => {
       setUser(response.data.user);
     } catch (error) {
       console.error("unauthorized");
+    } finally {
+      setIsLoading(false); // Set isLoading to false regardless of success or error
     }
   };
 
@@ -25,5 +28,5 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, setUser, isLoading }}>{children}</AuthContext.Provider>;
 };
