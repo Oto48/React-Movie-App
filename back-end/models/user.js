@@ -47,6 +47,9 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  userImage: {
+    type: String,
+  },
 });
 
 // Pre-save hook to hash the password before saving to the database

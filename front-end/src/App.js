@@ -3,6 +3,7 @@ import "./index.css";
 import Navbar from "./components/Navbar/Navbar";
 import Movies from "./components/Movies/Movies";
 import AuthForm from "./components/AuthForm/AuthForm";
+import Profile from "./components/Profile/Profile";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/bookmarked" element={<Movies isBookmarked={true} />} />
           <Route path="/login" element={<AuthForm isLogin={true} />} />
           <Route path="/register" element={<AuthForm isLogin={false} />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
