@@ -9,7 +9,6 @@ const Profile = () => {
   const { user, setUser } = useAuth();
 
   useEffect(() => {
-    // Fetch user's data when the component mounts
     if (user) {
       fetchImage();
     }
@@ -18,8 +17,9 @@ const Profile = () => {
   const handleImageUpload = async (event) => {
     const imageFile = event.target.files[0];
     if (imageFile) {
+      const newImageName = `${imageFile.name.split(".")[0]}-${user.username}.${imageFile.name.split(".")[1]}`;
       const formData = new FormData();
-      formData.append("image", imageFile);
+      formData.append("image", imageFile, newImageName);
 
       try {
         await axios.post("http://localhost:5000/upload", formData, {

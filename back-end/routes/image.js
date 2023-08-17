@@ -1,5 +1,7 @@
 const express = require("express");
 const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
 const User = require("../models/user");
 const { verifyToken } = require("../utils/token");
@@ -50,6 +52,12 @@ router.post(
         return res
           .status(400)
           .json({ message: "Image already set as avatar." });
+      }
+
+      // Remove the old image if it exists
+      if (user.userImage) {
+        const imagePath = path.join(__dirname, "../images", user.userImage);
+        fs.unlinkSync(imagePath);
       }
 
       // Store the uploaded image reference as the user's new image
