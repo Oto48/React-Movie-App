@@ -17,7 +17,9 @@ export const fetchMedia = async (mediaType) => {
 
 export const fetchTrendingMedia = async () => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/trending/all/day?language=en-US&api_key=${API_KEY}`);
+    const response = await fetch(
+      `https://api.themoviedb.org/3/trending/all/day?include_adult=false&include_video=false&language=en-US&api_key=${API_KEY}`
+    );
     const data = await response.json();
     return data.results;
   } catch (error) {
@@ -42,6 +44,20 @@ export const fetchBookmarkedMedia = async (user) => {
     } catch (error) {
       console.error("Error fetching bookmarked media:", error);
     }
+  }
+};
+
+export const searchMedia = async (query, mediaType) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/search/${
+        mediaType ? mediaType : "multi"
+      }?include_adult=false&api_key=${API_KEY}&query=${query}`
+    );
+    const results = response.data.results;
+    return results;
+  } catch (error) {
+    console.error("Error searching movies:", error);
   }
 };
 
