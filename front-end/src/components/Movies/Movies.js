@@ -8,7 +8,6 @@ import {
 } from "../../services/MovieService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
-import altImg from "../../assets/images/alt-img.jpg";
 import movieScoreIcon from "../../assets/images/movie-score-icon.png";
 import MovieIcon from "../../assets/svg/MovieIcon";
 import TVShowIcon from "../../assets/svg/TVShowIcon";
@@ -84,7 +83,7 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
               </div>
             )}
             <div className="h-52 xl:h-44">
-              <img className="w-full h-full rounded-lg object-cover object-center" src={posterPath} alt={altImg} />
+              <img className="w-full h-full rounded-lg object-cover object-center" src={posterPath} alt="poster" />
             </div>
             <div className="flex gap-2 items-center text-secondary text-sm font-light">
               <p>{releaseYear}</p>
