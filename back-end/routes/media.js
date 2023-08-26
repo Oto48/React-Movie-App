@@ -7,7 +7,9 @@ router.post("/bookmark/:mediaId/:isMovie", verifyToken, async (req, res) => {
   try {
     const { mediaId, isMovie } = req.params;
     const userId = req.user.userId;
-    const isMovieFlag = isMovie !== "undefined";
+
+    //Check whether the media is a movie or not.
+    const isMovieFlag = isMovie !== "undefined" && isMovie !== "tv";
 
     // Find the user by ID
     const user = await User.findById(userId);

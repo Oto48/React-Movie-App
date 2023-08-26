@@ -9,7 +9,7 @@ import TVShowIcon from "../../assets/svg/TVShowIcon";
 import BookmarkLogo from "../../assets/svg/BookmarkLogo";
 import SearchBar from "../SearchBar/SearchBar";
 
-const Movies = ({ endpoint, isTrending, isBookmarked }) => {
+const Movies = ({ endpoint, isBookmarked }) => {
   const [movies, setMovies] = useState([]);
   const baseURL = "https://image.tmdb.org/t/p/original";
   const { user, setUser, isLoading } = useAuth();
@@ -19,10 +19,7 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
     const fetchData = async () => {
       try {
         let data;
-        if (isTrending) {
-          data = await fetchMedia();
-          setMovies(data);
-        } else if (isBookmarked) {
+        if (isBookmarked) {
           if (user) {
             data = await fetchBookmarkedMedia(user);
             setMovies(data);
@@ -33,6 +30,7 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
           data = await fetchMedia(endpoint);
           setMovies(data);
         }
+        console.log(data);
       } catch (error) {
         console.log(`Error fetching ${endpoint}:`, error);
       }
@@ -41,9 +39,10 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
     if (!isLoading) {
       fetchData();
     }
-  }, [endpoint, isTrending, isBookmarked, user, isLoading, navigate]);
+  }, [endpoint, isBookmarked, user, isLoading, navigate]);
 
   const addBookmarkAction = (mediaId, isMovie) => {
+    console.log(isMovie);
     addBookmark(mediaId, isMovie, user, setUser);
   };
 

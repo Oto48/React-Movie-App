@@ -13,7 +13,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Navigate to="/trending" />} />
-          <Route path="/trending" element={<Movies isTrending={true} />} />
+          <Route path="/trending" element={<Movies />} />
           <Route path="/movies" element={<Movies endpoint={"movie"} />} />
           <Route path="/tvshows" element={<Movies endpoint={"tv"} />} />
           <Route path="/bookmarked" element={<Movies isBookmarked={true} />} />
