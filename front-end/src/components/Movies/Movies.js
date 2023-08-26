@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  fetchMedia,
-  fetchTrendingMedia,
-  fetchBookmarkedMedia,
-  addBookmark,
-  removeBookmark,
-} from "../../services/MovieService";
+import { fetchMedia, fetchBookmarkedMedia, addBookmark, removeBookmark } from "../../services/MovieService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 import movieScoreIcon from "../../assets/images/movie-score-icon.png";
+import altImg from "../../assets/images/alt-img.jpg";
 import MovieIcon from "../../assets/svg/MovieIcon";
 import TVShowIcon from "../../assets/svg/TVShowIcon";
 import BookmarkLogo from "../../assets/svg/BookmarkLogo";
@@ -25,7 +20,7 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
       try {
         let data;
         if (isTrending) {
-          data = await fetchTrendingMedia();
+          data = await fetchMedia();
           setMovies(data);
         } else if (isBookmarked) {
           if (user) {
@@ -64,10 +59,14 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
           const releaseYear = movie.release_date
             ? new Date(movie.release_date).getFullYear()
             : new Date(movie.first_air_date).getFullYear();
-          const posterPath = baseURL + (movie.backdrop_path || movie.poster_path);
+          const posterPath = movie.backdrop_path
+            ? baseURL + movie.backdrop_path
+            : movie.poster_path
+            ? baseURL + movie.poster_path
+            : null;
           const title = movie.title || movie.name;
           const isMovie = movie.title;
-          const rating = movie.vote_average.toFixed(1);
+          const rating = movie.vote_average?.toFixed(1);
 
           const isBookmarked = user?.bookmarkedMedia.some((item) => item.mediaId === movie.id);
 
@@ -86,11 +85,19 @@ const Movies = ({ endpoint, isTrending, isBookmarked }) => {
                 </div>
               )}
               <div className="h-52 xl:h-44">
-                <img className="w-full h-full rounded-lg object-cover object-center" src={posterPath} alt="poster" />
+                {posterPath ? (
+                  <img className="w-full h-full rounded-lg object-cover object-center" src={posterPath} alt="poster" />
+                ) : (
+                  <img className="w-full h-full rounded-lg object-cover object-center" src={altImg} alt="poster" />
+                )}
               </div>
               <div className="flex gap-2 items-center text-secondary text-sm font-light">
-                <p>{releaseYear}</p>
-                <div className="w-1 h-1 bg-white opacity-50 rounded-full"></div>
+                {!isNaN(releaseYear) && (
+                  <>
+                    <p>{releaseYear}</p>
+                    <div className="w-1 h-1 bg-white opacity-50 rounded-full"></div>
+                  </>
+                )}
                 {isMovie ? (
                   <div className="flex gap-2 items-center">
                     <MovieIcon fill={"#c3c4c7"} width={"12px"} height={"12px"} />

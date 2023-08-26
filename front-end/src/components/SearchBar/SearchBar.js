@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchMedia } from "../../services/MovieService";
+import { searchMedia, fetchMedia } from "../../services/MovieService";
 
 const SearchBar = ({ setMovies, endpoint }) => {
   const [query, setQuery] = useState("");
@@ -7,8 +7,13 @@ const SearchBar = ({ setMovies, endpoint }) => {
   const fetchSearchResults = async (event) => {
     const inputValue = event.target.value;
     setQuery(inputValue);
-    const data = await searchMedia(inputValue, endpoint);
-    setMovies(data);
+    if (inputValue) {
+      const data = await searchMedia(inputValue, endpoint);
+      setMovies(data);
+    } else {
+      const data = await fetchMedia(endpoint);
+      setMovies(data);
+    }
   };
 
   return (
