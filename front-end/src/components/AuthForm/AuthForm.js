@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Logo from "../../assets/svg/Logo";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../AuthContext"; // Import the useAuth hook
+import { useAuth } from "../../context/AuthContext"; // Import the useAuth hook
 
 const AuthForm = ({ isLogin }) => {
   const [formData, setFormData] = useState({

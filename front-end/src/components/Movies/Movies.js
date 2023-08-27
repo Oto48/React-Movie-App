@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchMedia, fetchBookmarkedMedia, addBookmark, removeBookmark } from "../../services/MovieService";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import movieScoreIcon from "../../assets/images/movie-score-icon.png";
 import altImg from "../../assets/images/alt-img.jpg";
 import MovieIcon from "../../assets/svg/MovieIcon";

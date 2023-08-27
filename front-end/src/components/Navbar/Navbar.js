@@ -6,7 +6,7 @@ import TVShowIcon from "../../assets/svg/TVShowIcon.js";
 import BookmarkedMedia from "../../assets/svg/BookmarkedMedia.js";
 import userAvatar from "../../assets/images/user-avatar.jpeg";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import Logo from "../../assets/svg/Logo";
 
 const Navbar = () => {

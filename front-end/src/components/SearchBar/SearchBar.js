@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { searchMedia, fetchMedia } from "../../services/MovieService";
 import SearchIcon from "../../assets/svg/SearchIcon";
 import { useSearchContext } from "../../context/SearchContext";
