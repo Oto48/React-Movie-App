@@ -61,7 +61,6 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
 
     const updatedBookmarkedMedia = [...user.bookmarkedMedia, { mediaId, isMovie: isMovieFlag }];
     const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
-    console.log(updatedUser);
     setUser(updatedUser);
   } catch (error) {
     console.error("Error bookmarking movie:", error);

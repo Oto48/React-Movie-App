@@ -30,7 +30,6 @@ const Movies = ({ endpoint, isBookmarked }) => {
           data = await fetchMedia(endpoint);
           setMovies(data);
         }
-        console.log(data);
       } catch (error) {
         console.log(`Error fetching ${endpoint}:`, error);
       }
@@ -42,7 +41,6 @@ const Movies = ({ endpoint, isBookmarked }) => {
   }, [endpoint, isBookmarked, user, isLoading, navigate]);
 
   const addBookmarkAction = (mediaId, isMovie) => {
-    console.log(isMovie);
     addBookmark(mediaId, isMovie, user, setUser);
   };
 
@@ -53,7 +51,7 @@ const Movies = ({ endpoint, isBookmarked }) => {
   return (
     <div className="w-full">
       <SearchBar setMovies={setMovies} endpoint={endpoint} />
-      <div className="flex flex-1 flex-wrap gap-8 w-full">
+      <div className="flex flex-1 flex-wrap gap-x-10 gap-y-8 w-full">
         {movies.map((movie) => {
           const releaseYear = movie.release_date
             ? new Date(movie.release_date).getFullYear()
