@@ -8,12 +8,14 @@ import MovieIcon from "../../assets/svg/MovieIcon";
 import TVShowIcon from "../../assets/svg/TVShowIcon";
 import BookmarkLogo from "../../assets/svg/BookmarkLogo";
 import SearchBar from "../SearchBar/SearchBar";
+import { useSearchContext } from "../../context/SearchContext";
 
 const Movies = ({ endpoint, isBookmarked }) => {
   const [movies, setMovies] = useState([]);
   const baseURL = "https://image.tmdb.org/t/p/original";
   const { user, setUser, isLoading } = useAuth();
   const navigate = useNavigate();
+  const { setQuery } = useSearchContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +37,13 @@ const Movies = ({ endpoint, isBookmarked }) => {
       }
     };
 
+    // Clear search input field in SearchBar
+    setQuery("");
+
     if (!isLoading) {
       fetchData();
     }
-  }, [endpoint, isBookmarked, user, isLoading, navigate]);
+  }, [endpoint, isBookmarked, user, isLoading, navigate, setQuery]);
 
   const addBookmarkAction = (mediaId, isMovie) => {
     addBookmark(mediaId, isMovie, user, setUser);

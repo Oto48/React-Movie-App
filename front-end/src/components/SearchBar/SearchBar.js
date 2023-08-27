@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { searchMedia, fetchMedia } from "../../services/MovieService";
 import SearchIcon from "../../assets/svg/SearchIcon";
+import { useSearchContext } from "../../context/SearchContext";
 
 const SearchBar = ({ setMovies, endpoint }) => {
-  const [query, setQuery] = useState("");
+  const { query, setQuery } = useSearchContext();
 
   const fetchSearchResults = async (event) => {
     const inputValue = event.target.value;
