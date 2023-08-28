@@ -1,19 +1,24 @@
 import React from "react";
-import { searchMedia, fetchMedia } from "../../services/MovieService";
+import { searchMedia, fetchMedia, fetchBookmarkedMedia, searchBookmarkedMedia } from "../../services/MovieService";
 import SearchIcon from "../../assets/svg/SearchIcon";
 import { useSearchContext } from "../../context/SearchContext";
+import { useAuth } from "../../context/AuthContext";
 
-const SearchBar = ({ setMovies, endpoint }) => {
+const SearchBar = ({ setMovies, endpoint, isBookmarked }) => {
   const { query, setQuery } = useSearchContext();
+  const { user } = useAuth();
 
   const fetchSearchResults = async (event) => {
     const inputValue = event.target.value;
     setQuery(inputValue);
+
     if (inputValue) {
-      const data = await searchMedia(inputValue, endpoint);
+      const data = isBookmarked
+        ? await searchBookmarkedMedia(inputValue, user)
+        : await searchMedia(inputValue, endpoint);
       setMovies(data);
     } else {
-      const data = await fetchMedia(endpoint);
+      const data = isBookmarked ? await fetchBookmarkedMedia(user) : await fetchMedia(endpoint);
       setMovies(data);
     }
   };

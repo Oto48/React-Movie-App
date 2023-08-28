@@ -50,6 +50,18 @@ export const searchMedia = async (query, mediaType) => {
   }
 };
 
+export const searchBookmarkedMedia = async (query, user) => {
+  const data = await fetchBookmarkedMedia(user);
+
+  const filteredMovies = data.filter((movie) => {
+    const titleMatch = movie.title && movie.title.toLowerCase().includes(query.toLowerCase());
+    const nameMatch = movie.name && movie.name.toLowerCase().includes(query.toLowerCase());
+    return titleMatch || nameMatch;
+  });
+
+  return filteredMovies;
+};
+
 export const addBookmark = async (mediaId, isMovie, user, setUser) => {
   try {
     await axios.post(`http://localhost:5000/bookmark/${mediaId}/${isMovie}`, null, {
