@@ -54,9 +54,9 @@ const Movies = ({ endpoint, isBookmarked }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="flex-1">
       <SearchBar setMovies={setMovies} endpoint={endpoint} isBookmarked={isBookmarked} />
-      <div className="flex flex-1 flex-wrap gap-x-10 gap-y-8 w-full">
+      <div className="flex flex-1 flex-wrap gap-x-8 lg:gap-x-10 gap-y-8 w-full">
         {movies.map((movie) => {
           const releaseYear = movie.release_date
             ? new Date(movie.release_date).getFullYear()
@@ -73,7 +73,7 @@ const Movies = ({ endpoint, isBookmarked }) => {
           const isBookmarked = user?.bookmarkedMedia.some((item) => item.mediaId === movie.id);
 
           return (
-            <div key={movie.id} className="w-poster flex flex-col gap-2 relative">
+            <div key={movie.id} className="w-poster lg:w-poster-lg flex flex-col gap-2 relative">
               {isBookmarked ? (
                 <div className="absolute top-4 right-6 cursor-pointer" onClick={() => removeBookmarkAction(movie.id)}>
                   <BookmarkLogo bookmarked={true} fill={"white"} />

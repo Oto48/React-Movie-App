@@ -30,10 +30,13 @@ const Navbar = () => {
   }
 
   return (
-    <div className="h-screen w-24 pb-16">
-      <nav className="bg-semiDarkBlue h-full rounded-2xl py-8 flex flex-col justify-between items-center">
-        <ul className="flex flex-col gap-10">
-          <Link to="/trending" className="flex justify-center mb-9">
+    <div className="h-20 lg:h-screen lg:w-24 lg:pb-16">
+      <nav className="bg-semiDarkBlue h-full rounded-2xl px-8 lg:px-0 lg:py-8 flex lg:flex-col justify-between items-center">
+        <Link to="/trending" className="flex justify-center lg:hidden">
+          <Logo />
+        </Link>
+        <ul className="flex lg:flex-col gap-10">
+          <Link to="/trending" className="flex justify-center mb-9 lg:block hidden">
             <Logo />
           </Link>
           <Link to="/trending" className="flex justify-center">

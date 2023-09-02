@@ -22,7 +22,10 @@ module.exports = {
     function ({ addComponents }) {
       addComponents({
         ".w-poster": {
-          width: "calc(25% - 30px)",
+          width: "calc((100% / 3) - (64px / 3))",
+        },
+        ".w-poster-lg": {
+          width: "calc(25% - (120px / 4))",
         },
       });
     },
