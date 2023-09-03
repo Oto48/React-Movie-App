@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import TrendingIcon from "../../assets/svg/TrendingIcon.js";
 import MovieIcon from "../../assets/svg/MovieIcon.js";
 import TVShowIcon from "../../assets/svg/TVShowIcon.js";
 import BookmarkedMedia from "../../assets/svg/BookmarkedMedia.js";
 import userAvatar from "../../assets/images/user-avatar.jpeg";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Logo from "../../assets/svg/Logo";
 
