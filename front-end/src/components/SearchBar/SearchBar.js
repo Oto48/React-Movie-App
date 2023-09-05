@@ -27,7 +27,7 @@ const SearchBar = ({ setMovies, endpoint, isBookmarked }) => {
     <div className="mt-4 mb-8 flex gap-6 items-center">
       <SearchIcon />
       <input
-        className="bg-transparent w-full py-4 focus:outline-none border-b border-transparent focus:border-greyishBlue text-2xl font-light"
+        className="bg-transparent w-full py-4 focus:outline-none border-b border-transparent focus:border-greyishBlue text-base md:text-2xl font-light"
         type="text"
         placeholder="Search for movies or TV series"
         value={query}

@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <div className="h-20 lg:h-screen lg:w-24 lg:pb-16">
       <nav className="bg-semiDarkBlue h-full rounded-2xl px-8 lg:px-0 lg:py-8 flex lg:flex-col justify-between items-center">
-        <Link to="/trending" className="flex justify-center lg:hidden">
+        <Link to="/trending" className="flex justify-center lg:hidden w-8">
           <Logo />
         </Link>
         <ul className="flex lg:flex-col gap-10">
@@ -53,7 +53,10 @@ const Navbar = () => {
             </Link>
           )}
         </ul>
-        <Link to={user ? "/profile" : "/login"} className="w-10 h-10 border-[1px] border-white rounded-full">
+        <Link
+          to={user ? "/profile" : "/login"}
+          className="w-8 h-8 lg:w-10 lg:h-10 border-[1px] border-white rounded-full"
+        >
           <img className="rounded-full w-full h-full" src={user?.userImage ? avatarImage : userAvatar} alt="avatar" />
         </Link>
       </nav>

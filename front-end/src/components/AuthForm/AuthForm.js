@@ -113,7 +113,7 @@ const AuthForm = ({ isLogin }) => {
   };
 
   return (
-    <div className={`w-full flex flex-col items-center gap-${invalid ? 10 : 20} mt-20`}>
+    <div className={`w-full flex flex-col items-center gap-${invalid ? 10 : 20} mt-12`}>
       <Link to="/trending" className="flex justify-center">
         <Logo />
       </Link>
