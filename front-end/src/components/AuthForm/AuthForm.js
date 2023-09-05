@@ -113,14 +113,14 @@ const AuthForm = ({ isLogin }) => {
   };
 
   return (
-    <div className={`w-full flex flex-col items-center gap-${invalid ? 10 : 20} mt-12`}>
+    <div className={`w-full flex flex-col items-center gap-${invalid ? 10 : 20} mt-12 md:mt-16 lg:mt-20`}>
       <Link to="/trending" className="flex justify-center">
         <Logo />
       </Link>
       {invalid && <p className="text-red text-lg">Invalid Email or Password</p>}
       <form
         onSubmit={isLogin ? login : register}
-        className="p-8 bg-semiDarkBlue flex flex-col w-[400px] rounded-[20px] gap-[24px] text-[15px] font-light"
+        className="p-8 bg-semiDarkBlue flex flex-col w-80 small:w-[400px] rounded-[20px] gap-[24px] text-[15px] font-light"
       >
         <h2 className="capitalize text-[32px]">{isLogin ? "login" : "sign up"}</h2>
         <div>

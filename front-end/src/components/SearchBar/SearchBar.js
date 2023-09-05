@@ -24,7 +24,7 @@ const SearchBar = ({ setMovies, endpoint, isBookmarked }) => {
   };
 
   return (
-    <div className="mt-4 mb-8 flex gap-6 items-center">
+    <div className="mt-2 mb-6 lg:mt-4 lg:mb-8 flex gap-6 items-center">
       <SearchIcon />
       <input
         className="bg-transparent w-full py-4 focus:outline-none border-b border-transparent focus:border-greyishBlue text-base md:text-2xl font-light"

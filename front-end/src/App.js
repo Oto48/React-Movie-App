@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 function App() {
   return (
     <Router>
-      <div className="bg-darkBlue min-h-screen text-white flex lg:gap-10 p-4 pt-0 md:p-6 lg:p-8 font-outfit flex-col lg:flex-row">
+      <div className="bg-darkBlue min-h-screen text-white flex lg:gap-10 font-outfit flex-col lg:flex-row">
         <Navbar />
         <Routes>
           <Route path="/" element={<Navigate to="/trending" />} />

@@ -29,22 +29,22 @@ const Navbar = () => {
   }
 
   return (
-    <div className="h-20 lg:h-screen lg:w-24 lg:pb-16">
-      <nav className="bg-semiDarkBlue h-full rounded-2xl px-8 lg:px-0 lg:py-8 flex lg:flex-col justify-between items-center">
-        <Link to="/trending" className="flex justify-center lg:hidden w-8">
+    <div className="h-14 md:px-6 md:h-24 md:pt-6 lg:h-screen lg:w-32 lg:p-8 lg:pr-0">
+      <nav className="bg-semiDarkBlue h-full md:rounded-2xl px-8 lg:px-0 lg:py-8 flex lg:flex-col justify-between items-center">
+        <Link to="/trending" className="flex justify-center lg:hidden w-6 md:w-8">
           <Logo />
         </Link>
         <ul className="flex lg:flex-col gap-10">
           <Link to="/trending" className="flex justify-center mb-9 lg:block hidden">
             <Logo />
           </Link>
-          <Link to="/trending" className="flex justify-center">
+          <Link to="/trending" className="flex justify-center w-4 md:w-auto">
             <TrendingIcon />
           </Link>
-          <Link to="/movies" className="flex justify-center">
+          <Link to="/movies" className="flex justify-center w-4 md:w-auto">
             <MovieIcon />
           </Link>
-          <Link to="/tvshows" className="flex justify-center">
+          <Link to="/tvshows" className="flex justify-center w-4 md:w-auto">
             <TVShowIcon />
           </Link>
           {user && (
@@ -55,7 +55,7 @@ const Navbar = () => {
         </ul>
         <Link
           to={user ? "/profile" : "/login"}
-          className="w-8 h-8 lg:w-10 lg:h-10 border-[1px] border-white rounded-full"
+          className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 border-[1px] border-white rounded-full"
         >
           <img className="rounded-full w-full h-full" src={user?.userImage ? avatarImage : userAvatar} alt="avatar" />
         </Link>
