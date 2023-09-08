@@ -69,6 +69,7 @@ const AuthForm = ({ isLogin }) => {
         const response = await axios.post("https://react-movie-app-1fej.onrender.com/login", formData, {
           withCredentials: true, // Send cookies along with the request
         });
+
         console.log(response.data);
 
         const userResponse = await axios.get("https://react-movie-app-1fej.onrender.com/user", {

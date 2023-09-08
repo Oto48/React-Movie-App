@@ -11,7 +11,7 @@ const mediaRoutes = require("./routes/media");
 const imageRoutes = require("./routes/image");
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // Use the cors middleware
+app.use(cors({ credentials: true, origin: "http://127.0.0.1:3000" })); // Use the cors middleware
 app.use(cookieParser());
 
 app.use("/", authRoutes);
