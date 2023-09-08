@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const mongoDBUrl = "mongodb://localhost:27017/movie_app";
+const mongoDBUrl =
+  "mongodb+srv://user:user123@cluster0.djbyzkh.mongodb.net/?retryWrites=true&w=majority";
 
 // Return a promise that resolves when the connection is open
 const connectToDatabase = () => {
