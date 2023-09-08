@@ -14,7 +14,10 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "https://64fb5ac861818b31ae9fdd6d--guileless-bunny-d9d7fd.netlify.app",
+    ],
   })
 ); // Use the cors middleware
 app.use(cookieParser());
