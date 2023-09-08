@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/user", {
+      const response = await axios.get("https://react-movie-app-1fej.onrender.com/user", {
         withCredentials: true,
       });
       setUser(response.data.user);

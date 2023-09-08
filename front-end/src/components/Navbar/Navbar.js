@@ -15,7 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     if (!isLoading) {
       if (user) {
-        const imageURL = `http://localhost:5000/images/${user.userImage}`;
+        const imageURL = `https://react-movie-app-1fej.onrender.com/images/${user.userImage}`;
         setAvatarImage(imageURL);
       }
     }

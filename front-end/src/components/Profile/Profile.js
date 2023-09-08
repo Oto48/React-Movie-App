@@ -14,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const imageURL = `http://localhost:5000/images/${user.userImage}`;
+        const imageURL = `https://react-movie-app-1fej.onrender.com/images/${user.userImage}`;
         setAvatarImage(imageURL);
       } catch (error) {
         console.error("Error fetching image:", error);
@@ -39,7 +39,7 @@ const Profile = () => {
       formData.append("image", imageFile, newImageName);
 
       try {
-        await axios.post("http://localhost:5000/upload", formData, {
+        await axios.post("https://react-movie-app-1fej.onrender.com/upload", formData, {
           withCredentials: true,
         });
 
@@ -53,7 +53,7 @@ const Profile = () => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:5000/logout", null, {
+      await axios.post("https://react-movie-app-1fej.onrender.com/logout", null, {
         withCredentials: true,
       });
       setUser(null);

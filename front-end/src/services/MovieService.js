@@ -64,7 +64,7 @@ export const searchBookmarkedMedia = async (query, user) => {
 
 export const addBookmark = async (mediaId, isMovie, user, setUser) => {
   try {
-    await axios.post(`http://localhost:5000/bookmark/${mediaId}/${isMovie}`, null, {
+    await axios.post(`https://react-movie-app-1fej.onrender.com/bookmark/${mediaId}/${isMovie}`, null, {
       withCredentials: true,
     });
 
@@ -81,7 +81,7 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
 
 export const removeBookmark = async (mediaId, user, setUser) => {
   try {
-    await axios.delete(`http://localhost:5000/bookmark/${mediaId}`, {
+    await axios.delete(`https://react-movie-app-1fej.onrender.com/bookmark/${mediaId}`, {
       withCredentials: true,
     });
 
