@@ -65,8 +65,8 @@ router.post("/login", async (req, res) => {
       sameSite: "strict",
     });
   } catch (error) {
-    console.error("Error during login:", error);
-    res.status(500).json({ message: "Internal server error." });
+    // console.error("Error during login:", error);
+    // res.status(500).json({ message: "Internal server error." });
   }
 });
 
