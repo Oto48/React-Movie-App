@@ -3,7 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
 const path = require("path");
-const port = "https://react-movie-app-1fej.onrender.com";
+const port = 5000;
 
 const connectToDatabase = require("./db/connection");
 const authRoutes = require("./routes/auth");
