@@ -26,7 +26,7 @@ const startServer = async () => {
   try {
     await connectToDatabase();
     app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`);
+      console.log(`Server is running on te port: ${port}`);
     });
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
