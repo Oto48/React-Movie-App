@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 function App() {
   return (
-    <Router basename="/React-Movie-App">
+    <Router>
       <div className="bg-darkBlue min-h-screen text-white flex lg:gap-10 font-outfit flex-col lg:flex-row">
         <Navbar />
         <Routes>
