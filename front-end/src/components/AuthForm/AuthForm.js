@@ -44,7 +44,7 @@ const AuthForm = ({ isLogin }) => {
 
       try {
         // Make the API call to the backend server
-        await axios.post("https://react-movie-app-1fej.onrender.com/register", dataWithoutRepeatPassword);
+        await axios.post("http://localhost:5000/register", dataWithoutRepeatPassword);
         setFormData({
           username: "",
           email: "",
@@ -66,17 +66,16 @@ const AuthForm = ({ isLogin }) => {
     if (!Object.keys(errors).length) {
       try {
         // Make the API call to the backend server for login
-        const response = await axios.post("http://localhost:5000/login", formData);
-
+        const response = await axios.post("http://localhost:5000/login", formData, {
+          withCredentials: true, // Send cookies along with the request
+        });
         console.log(response.data);
 
-        const user = response.data.user;
+        const userResponse = await axios.get("http://localhost:5000/user", {
+          withCredentials: true,
+        });
 
-        console.log(user);
-
-        // localStorage.setItem("user", JSON.stringify(user));
-
-        setUser(user);
+        setUser(userResponse.data.user);
         navigate("/trending");
       } catch (error) {
         setInvalid(true);
