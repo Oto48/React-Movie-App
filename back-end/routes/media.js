@@ -50,7 +50,7 @@ router.delete("/bookmark", async (req, res) => {
     if (!user) {
       return res
         .status(404)
-        .json({ message: `User not found. useri ID is ${userId}` });
+        .json({ message: `User not found. useri ID is ${(userId, mediaId)}` });
     }
 
     // Remove the specified media ID from the bookmarkedMedia array
