@@ -16,7 +16,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "https://64fb5ac861818b31ae9fdd6d--guileless-bunny-d9d7fd.netlify.app",
+      "https://oto-react-movie-app.netlify.app",
     ],
   })
 ); // Use the cors middleware
