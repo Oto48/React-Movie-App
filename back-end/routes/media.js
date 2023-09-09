@@ -41,14 +41,14 @@ router.post("/test", async (req, res) => {
   }
 });
 
-router.delete("/bookmark/:mediaId", async (req, res) => {
+router.delete("/bookmark/:mediaId/:uderId", async (req, res) => {
   try {
-    const { mediaId } = req.params;
+    const { mediaId, userId } = req.params;
 
     // Find the user by ID
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(500).json({
+      return res.status(404).json({
         message: `response here is - >>>>>>>> ${mediaId}`,
       });
     }
