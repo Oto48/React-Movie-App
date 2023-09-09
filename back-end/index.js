@@ -13,7 +13,6 @@ const imageRoutes = require("./routes/image");
 app.use(express.json());
 app.use(
   cors({
-    credentials: true,
     origin: "*",
   })
 ); // Use the cors middleware
