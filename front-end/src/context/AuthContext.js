@@ -13,9 +13,12 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("https://react-movie-app-1fej.onrender.com/user", {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        "https://cors-anywhere.herokuapp.com/https://react-movie-app-1fej.onrender.com/user",
+        {
+          withCredentials: true,
+        }
+      );
       setUser(response.data.user);
     } catch (error) {
       console.error("unauthorized");
