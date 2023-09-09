@@ -52,15 +52,8 @@ const Profile = () => {
   };
 
   const logout = async () => {
-    try {
-      await axios.post("https://react-movie-app-1fej.onrender.com/logout", null, {
-        withCredentials: true,
-      });
-      setUser(null);
-      navigate("/trending");
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
+    localStorage.removeItem("user");
+    setUser(null);
   };
 
   return (

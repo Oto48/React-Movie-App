@@ -13,8 +13,8 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("https://react-movie-app-1fej.onrender.com/user");
-      setUser(response.data.user);
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUser(user);
     } catch (error) {
       console.error("unauthorized");
     } finally {
