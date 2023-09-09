@@ -48,7 +48,7 @@ router.delete("/bookmark/:mediaId", async (req, res) => {
     // Find the user by ID
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({
+      return res.status(500).json({
         message: `response here is - >>>>>>>> ${mediaId}`,
       });
     }
