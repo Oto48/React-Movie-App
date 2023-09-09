@@ -74,7 +74,7 @@ const AuthForm = ({ isLogin }) => {
 
         console.log(user);
 
-        localStorage.setItem("user", JSON.stringify(user));
+        // localStorage.setItem("user", JSON.stringify(user));
 
         setUser(user);
         navigate("/trending");
