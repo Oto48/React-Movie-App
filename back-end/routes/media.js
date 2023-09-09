@@ -41,15 +41,15 @@ router.post("/test", async (req, res) => {
   }
 });
 
-router.delete("/bookmark", async (req, res) => {
+router.delete("/bookmark/:mediaId", async (req, res) => {
   try {
-    const { mediaId, userId } = req.body;
+    const { mediaId } = req.params;
 
     // Find the user by ID
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({
-        message: `User not found. useri ID is ${userId} and $ ${mediaId}`,
+        message: `response here is - >>>>>>>> ${mediaId}`,
       });
     }
 
