@@ -14,11 +14,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:3000",
-      "https://cors-anywhere.herokuapp.com/https://oto-react-movie-app.netlify.app",
-      "https://oto-react-movie-app.netlify.app",
-    ],
+    origin: "*",
   })
 ); // Use the cors middleware
 app.use(cookieParser());
