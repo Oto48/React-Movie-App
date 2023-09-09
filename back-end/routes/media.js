@@ -41,7 +41,7 @@ router.post("/test", async (req, res) => {
   }
 });
 
-router.delete("/bookmark/:mediaId/:uderId", async (req, res) => {
+router.delete("/bookmark/:mediaId/:userId", async (req, res) => {
   try {
     const { mediaId, userId } = req.params;
 

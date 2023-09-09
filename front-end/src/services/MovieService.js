@@ -90,6 +90,8 @@ export const removeBookmark = async (mediaId, user, setUser) => {
       userId: user._id,
     };
 
+    console.log(user._id);
+
     const userId = user._id;
 
     console.log(bookmarkData);
