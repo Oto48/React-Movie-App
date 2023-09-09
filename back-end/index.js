@@ -13,7 +13,12 @@ const imageRoutes = require("./routes/image");
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "https://cors-anywhere.herokuapp.com/https://oto-react-movie-app.netlify.app",
+      "https://oto-react-movie-app.netlify.app",
+    ],
   })
 ); // Use the cors middleware
 app.use(cookieParser());
