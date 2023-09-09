@@ -42,7 +42,7 @@ router.post("/test", async (req, res) => {
   }
 });
 
-router.delete("/bookmark", verifyToken, async (req, res) => {
+router.delete("/bookmark", async (req, res) => {
   try {
     const { mediaId, userId } = req.body;
 
