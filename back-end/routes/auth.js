@@ -98,7 +98,7 @@ router.post("/logout", (req, res) => {
 router.get("/user", verifyToken, async (req, res) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://cors-anywhere.herokuapp.com/https://oto-react-movie-app.netlify.app"
+    "https://oto-react-movie-app.netlify.app"
   );
   res.header("Access-Control-Allow-Credentials", "true"); // To allow credentials
   try {
