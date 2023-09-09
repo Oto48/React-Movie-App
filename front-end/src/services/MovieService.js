@@ -69,8 +69,9 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
     const bookmarkData = {
       mediaId,
       isMovie: isMovieFlag,
-      userId: user.userId, // Include user ID if needed for identification
+      userId: user._id, // Include user ID if needed for identification
     };
+
     await axios.post("https://react-movie-app-1fej.onrender.com/test", bookmarkData);
     //Check whether the media is a movie or not.
 
@@ -84,9 +85,12 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
 
 export const removeBookmark = async (mediaId, user, setUser) => {
   try {
-    await axios.delete(`https://react-movie-app-1fej.onrender.com/bookmark/${mediaId}`, {
-      withCredentials: true,
-    });
+    const bookmarkData = {
+      mediaId,
+      userId: user._id, // Include user ID if needed for identification
+    };
+
+    await axios.delete("https://react-movie-app-1fej.onrender.com/bookmark", bookmarkData);
 
     const updatedBookmarkedMedia = user.bookmarkedMedia.filter((bookmark) => !(bookmark.mediaId === parseInt(mediaId)));
     const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };

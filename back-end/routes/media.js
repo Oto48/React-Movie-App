@@ -42,10 +42,9 @@ router.post("/test", async (req, res) => {
   }
 });
 
-router.delete("/bookmark/:mediaId", verifyToken, async (req, res) => {
+router.delete("/bookmark", verifyToken, async (req, res) => {
   try {
-    const { mediaId } = req.params;
-    const userId = req.user.userId;
+    const { mediaId, userId } = req.body;
 
     // Find the user by ID
     const user = await User.findById(userId);
