@@ -36,6 +36,12 @@ router.post("/register", async (req, res) => {
 
 // Login route
 router.post("/login", async (req, res) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://cors-anywhere.herokuapp.com/https://oto-react-movie-app.netlify.app"
+  );
+  res.header("Access-Control-Allow-Credentials", "true"); // To allow credentials
+
   try {
     const { email, password } = req.body;
 
@@ -90,6 +96,11 @@ router.post("/logout", (req, res) => {
 
 // Get user route
 router.get("/user", verifyToken, async (req, res) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://cors-anywhere.herokuapp.com/https://oto-react-movie-app.netlify.app"
+  );
+  res.header("Access-Control-Allow-Credentials", "true"); // To allow credentials
   try {
     const userId = req.user.userId;
     const user = await User.findById(userId);
