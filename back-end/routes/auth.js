@@ -36,12 +36,6 @@ router.post("/register", async (req, res) => {
 
 // Login route
 router.post("/login", async (req, res) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://oto-react-movie-app.netlify.app"
-  );
-  res.header("Access-Control-Allow-Credentials", "true"); // To allow credentials
-
   try {
     const { email, password } = req.body;
 
@@ -62,14 +56,6 @@ router.post("/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials." });
     }
-
-    // User login successful, generate a token and send it as a secure HttpOnly cookie
-    const token = generateToken(user);
-    res.cookie("authToken", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-    });
 
     res.status(200).json({ message: "Login successful." });
   } catch (error) {
@@ -95,12 +81,7 @@ router.post("/logout", (req, res) => {
 });
 
 // Get user route
-router.get("/user", verifyToken, async (req, res) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://oto-react-movie-app.netlify.app"
-  );
-  res.header("Access-Control-Allow-Credentials", "true"); // To allow credentials
+router.get("/user", async (req, res) => {
   try {
     const userId = req.user.userId;
     const user = await User.findById(userId);
