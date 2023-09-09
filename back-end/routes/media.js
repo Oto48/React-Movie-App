@@ -13,7 +13,9 @@ router.post("/test", async (req, res) => {
     // Find the user by ID
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ message: "User not found." });
+      return res
+        .status(404)
+        .json({ message: `User not found. user id is ${userId}` });
     }
 
     // Check if the media ID is already in the bookmarkedMedia array
