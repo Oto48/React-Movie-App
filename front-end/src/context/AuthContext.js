@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -13,10 +12,8 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("https://react-movie-app-1fej.onrender.com/user", {
-        withCredentials: true,
-      });
-      setUser(response.data.user);
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUser(user);
     } catch (error) {
       console.error("unauthorized");
     } finally {
