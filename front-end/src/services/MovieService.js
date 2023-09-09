@@ -64,13 +64,9 @@ export const searchBookmarkedMedia = async (query, user) => {
 
 export const addBookmark = async (mediaId, isMovie, user, setUser) => {
   try {
-    await axios.post(
-      `https://cors-anywhere.herokuapp.com/https://react-movie-app-1fej.onrender.com/bookmark/${mediaId}/${isMovie}`,
-      null,
-      {
-        withCredentials: true,
-      }
-    );
+    await axios.post(`https://react-movie-app-1fej.onrender.com/bookmark/${mediaId}/${isMovie}`, null, {
+      withCredentials: true,
+    });
 
     //Check whether the media is a movie or not.
     const isMovieFlag = isMovie !== "undefined" && isMovie !== "tv";
@@ -85,12 +81,9 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
 
 export const removeBookmark = async (mediaId, user, setUser) => {
   try {
-    await axios.delete(
-      `https://cors-anywhere.herokuapp.com/https://react-movie-app-1fej.onrender.com/bookmark/${mediaId}`,
-      {
-        withCredentials: true,
-      }
-    );
+    await axios.delete(`https://react-movie-app-1fej.onrender.com/bookmark/${mediaId}`, {
+      withCredentials: true,
+    });
 
     const updatedBookmarkedMedia = user.bookmarkedMedia.filter((bookmark) => !(bookmark.mediaId === parseInt(mediaId)));
     const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };

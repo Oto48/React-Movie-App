@@ -14,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const imageURL = `https://cors-anywhere.herokuapp.com/https://react-movie-app-1fej.onrender.com/images/${user.userImage}`;
+        const imageURL = `https://react-movie-app-1fej.onrender.com/images/${user.userImage}`;
         setAvatarImage(imageURL);
       } catch (error) {
         console.error("Error fetching image:", error);
@@ -39,13 +39,9 @@ const Profile = () => {
       formData.append("image", imageFile, newImageName);
 
       try {
-        await axios.post(
-          "https://cors-anywhere.herokuapp.com/https://react-movie-app-1fej.onrender.com/upload",
-          formData,
-          {
-            withCredentials: true,
-          }
-        );
+        await axios.post("https://react-movie-app-1fej.onrender.com/upload", formData, {
+          withCredentials: true,
+        });
 
         const updatedUser = { ...user, userImage: newImageName };
         setUser(updatedUser);
@@ -57,7 +53,7 @@ const Profile = () => {
 
   const logout = async () => {
     try {
-      await axios.post("https://cors-anywhere.herokuapp.com/https://react-movie-app-1fej.onrender.com/logout", null, {
+      await axios.post("https://react-movie-app-1fej.onrender.com/logout", null, {
         withCredentials: true,
       });
       setUser(null);
