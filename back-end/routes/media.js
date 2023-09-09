@@ -12,26 +12,25 @@ router.post("/bookmark", async (req, res) => {
 
     // Find the user by ID
     const user = await User.findById(userId);
-    res.status(404).json({ message: "User not found." });
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
 
-    // // Check if the media ID is already in the bookmarkedMedia array
-    // const isBookmarked = user.bookmarkedMedia.some(
-    //   (bookmark) => bookmark.mediaId === parseInt(mediaId)
-    // );
+    // Check if the media ID is already in the bookmarkedMedia array
+    const isBookmarked = user.bookmarkedMedia.some(
+      (bookmark) => bookmark.mediaId === parseInt(mediaId)
+    );
 
-    // if (isBookmarked) {
-    //   return res.status(409).json({ message: "Movie already bookmarked." });
-    // }
+    if (isBookmarked) {
+      return res.status(409).json({ message: "Movie already bookmarked." });
+    }
 
-    // // Add the media ID to the bookmarkedMovies array
-    // user.bookmarkedMedia.push({
-    //   mediaId: parseInt(mediaId),
-    //   isMovie: isMovieFlag,
-    // });
-    // await user.save();
+    // Add the media ID to the bookmarkedMovies array
+    user.bookmarkedMedia.push({
+      mediaId: parseInt(mediaId),
+      isMovie: isMovieFlag,
+    });
+    await user.save();
 
     res.status(200).json({ message: "Movie bookmarked successfully." });
   } catch (error) {
