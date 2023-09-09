@@ -71,7 +71,7 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
       isMovie: isMovieFlag,
       userId: user.userId, // Include user ID if needed for identification
     };
-    await axios.post(`https://react-movie-app-1fej.onrender.com/bookmark`, bookmarkData);
+    await axios.post("https://react-movie-app-1fej.onrender.com/test", bookmarkData);
     //Check whether the media is a movie or not.
 
     const updatedBookmarkedMedia = [...user.bookmarkedMedia, { mediaId, isMovie: isMovieFlag }];

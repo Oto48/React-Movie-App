@@ -3,7 +3,7 @@ const router = express.Router();
 const { verifyToken } = require("../utils/token");
 const User = require("../models/user");
 
-router.post("/bookmark", async (req, res) => {
+router.post("/test", async (req, res) => {
   try {
     const { mediaId, isMovie, userId } = req.body;
 
