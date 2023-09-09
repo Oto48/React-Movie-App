@@ -48,9 +48,9 @@ router.delete("/bookmark", async (req, res) => {
     // Find the user by ID
     const user = await User.findById(userId);
     if (!user) {
-      return res
-        .status(404)
-        .json({ message: `User not found. useri ID is ${(userId, mediaId)}` });
+      return res.status(404).json({
+        message: `User not found. useri ID is ${userId} and $ ${mediaId}`,
+      });
     }
 
     // Remove the specified media ID from the bookmarkedMedia array

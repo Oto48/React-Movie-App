@@ -87,10 +87,10 @@ export const removeBookmark = async (mediaId, user, setUser) => {
   try {
     const bookmarkData = {
       mediaId,
-      userId: user._id, // Include user ID if needed for identification
+      userId: "user._id",
     };
 
-    console.log(user._id);
+    console.log(bookmarkData);
 
     await axios.delete("https://react-movie-app-1fej.onrender.com/bookmark", bookmarkData);
 
