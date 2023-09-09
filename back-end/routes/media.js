@@ -36,6 +36,7 @@ router.post("/bookmark", async (req, res) => {
   } catch (error) {
     console.error("Error bookmarking movie:", error);
     res.status(500).json({ message: "Internal server error." });
+    res.status(404).json({ message: "Internal server error." });
   }
 });
 
