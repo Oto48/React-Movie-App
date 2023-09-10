@@ -39,9 +39,8 @@ const Profile = () => {
       formData.append("image", imageFile, newImageName);
 
       try {
-        await axios.post("https://react-movie-app-1fej.onrender.com/upload", formData, {
-          withCredentials: true,
-        });
+        const userId = user._id;
+        await axios.post(`https://react-movie-app-1fej.onrender.com/upload/${userId}`, formData);
 
         const updatedUser = { ...user, userImage: newImageName };
         setUser(updatedUser);
