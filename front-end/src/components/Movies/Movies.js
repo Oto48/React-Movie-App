@@ -57,7 +57,7 @@ const Movies = ({ endpoint, isBookmarked }) => {
     <div className="flex-1 p-4 md:p-6 lg:pl-0 lg:p-8">
       <SearchBar setMovies={setMovies} endpoint={endpoint} isBookmarked={isBookmarked} />
       <div className="flex flex-1 flex-wrap gap-x-4 md:gap-x-8 xl:gap-x-10 gap-y-4 md:gap-y-6 xl:gap-y-8 w-full">
-        {movies.map((movie) => {
+        {movies?.map((movie) => {
           const releaseYear = movie.release_date
             ? new Date(movie.release_date).getFullYear()
             : new Date(movie.first_air_date).getFullYear();

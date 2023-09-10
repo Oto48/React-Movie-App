@@ -69,14 +69,17 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
     const bookmarkData = {
       mediaId,
       isMovie: isMovieFlag,
-      userId: user._id, // Include user ID if needed for identification
+      userId: user._id,
     };
 
     await axios.post("https://react-movie-app-1fej.onrender.com/bookmark", bookmarkData);
-    //Check whether the media is a movie or not.
 
+    //Check whether the media is a movie or not.
     const updatedBookmarkedMedia = [...user.bookmarkedMedia, { mediaId, isMovie: isMovieFlag }];
     const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
     setUser(updatedUser);
   } catch (error) {
     console.error("Error bookmarking movie:", error);
@@ -100,6 +103,9 @@ export const removeBookmark = async (mediaId, user, setUser) => {
 
     const updatedBookmarkedMedia = user.bookmarkedMedia.filter((bookmark) => !(bookmark.mediaId === parseInt(mediaId)));
     const updatedUser = { ...user, bookmarkedMedia: updatedBookmarkedMedia };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
     setUser(updatedUser);
   } catch (error) {
     console.error("Error removing bookmark:", error);

@@ -66,7 +66,7 @@ const AuthForm = ({ isLogin }) => {
     if (!Object.keys(errors).length) {
       try {
         // Make the API call to the backend server for login
-        const response = await axios.post("http://localhost:5000/login", formData);
+        const response = await axios.post("https://react-movie-app-1fej.onrender.com/login", formData);
 
         console.log(response.data);
 
