@@ -65,11 +65,15 @@ const Profile = () => {
         <div className="flex justify-center">
           <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={imageUpload} />
           <label htmlFor="fileInput" className="flex w-60 h-60 relative">
-            <img
-              src={user?.userImage ? avatarImage : userAvatar}
-              className="rounded-full w-full h-full border-2"
-              alt="avatar"
-            />
+            {avatarImage ? (
+              <img
+                src={user?.userImage ? avatarImage : userAvatar}
+                className="rounded-full w-full h-full border-2"
+                alt="avatar"
+              />
+            ) : (
+              <img src={userAvatar} className="rounded-full w-full h-full border-2" alt="avatar" />
+            )}
             <div
               className="w-full h-full rounded-full opacity-0 hover:opacity-10 bg-white absolute cursor-pointer"
               onClick={() => fileInputRef.current.click()}

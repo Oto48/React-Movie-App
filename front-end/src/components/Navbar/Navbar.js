@@ -53,12 +53,21 @@ const Navbar = () => {
             </Link>
           )}
         </ul>
-        <Link
-          to={user ? "/profile" : "/login"}
-          className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 border-[1px] border-white rounded-full"
-        >
-          <img className="rounded-full w-full h-full" src={user?.userImage ? avatarImage : userAvatar} alt="avatar" />
-        </Link>
+        {avatarImage ? (
+          <Link
+            to={user ? "/profile" : "/login"}
+            className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 border-[1px] border-white rounded-full"
+          >
+            <img className="rounded-full w-full h-full" src={user?.userImage ? avatarImage : userAvatar} alt="avatar" />
+          </Link>
+        ) : (
+          <Link
+            to={user ? "/profile" : "/login"}
+            className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 border-[1px] border-white rounded-full"
+          >
+            <img className="rounded-full w-full h-full" src={userAvatar} alt="avatar" />
+          </Link>
+        )}
       </nav>
     </div>
   );
