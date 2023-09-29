@@ -8,6 +8,11 @@ export function useSearchContext() {
 
 export function SearchProvider({ children }) {
   const [query, setQuery] = useState("");
+  const [bookmarkQuery, setBookmarkQuery] = useState(false); // Include bookmark-related state here
 
-  return <SearchContext.Provider value={{ query, setQuery }}>{children}</SearchContext.Provider>;
+  return (
+    <SearchContext.Provider value={{ query, setQuery, bookmarkQuery, setBookmarkQuery }}>
+      {children}
+    </SearchContext.Provider>
+  );
 }

@@ -62,8 +62,10 @@ export const searchBookmarkedMedia = async (query, user) => {
   return filteredMovies;
 };
 
-export const addBookmark = async (mediaId, isMovie, user, setUser) => {
+export const addBookmark = async (mediaId, isMovie, user, setUser, setBookmarkMedia) => {
   try {
+    setBookmarkMedia(mediaId);
+
     const isMovieFlag = isMovie !== "undefined" && isMovie !== "tv";
 
     const bookmarkData = {
@@ -80,14 +82,17 @@ export const addBookmark = async (mediaId, isMovie, user, setUser) => {
 
     localStorage.setItem("user", JSON.stringify(updatedUser));
 
+    setBookmarkMedia(false);
     setUser(updatedUser);
   } catch (error) {
     console.error("Error bookmarking movie:", error);
   }
 };
 
-export const removeBookmark = async (mediaId, user, setUser) => {
+export const removeBookmark = async (mediaId, user, setUser, setBookmarkMedia) => {
   try {
+    setBookmarkMedia(mediaId);
+
     const bookmarkData = {
       mediaId,
       userId: user._id,
@@ -106,6 +111,7 @@ export const removeBookmark = async (mediaId, user, setUser) => {
 
     localStorage.setItem("user", JSON.stringify(updatedUser));
 
+    setBookmarkMedia(false);
     setUser(updatedUser);
   } catch (error) {
     console.error("Error removing bookmark:", error);

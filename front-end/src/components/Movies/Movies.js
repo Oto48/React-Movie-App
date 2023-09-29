@@ -9,13 +9,14 @@ import TVShowIcon from "../../assets/svg/TVShowIcon";
 import BookmarkLogo from "../../assets/svg/BookmarkLogo";
 import SearchBar from "../SearchBar/SearchBar";
 import { useSearchContext } from "../../context/SearchContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Movies = ({ endpoint, isBookmarked }) => {
   const [movies, setMovies] = useState([]);
   const baseURL = "https://image.tmdb.org/t/p/original";
   const { user, setUser, isLoading } = useAuth();
   const navigate = useNavigate();
-  const { setQuery } = useSearchContext();
+  const { setQuery, bookmarkQuery, setBookmarkQuery } = useSearchContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,11 +47,11 @@ const Movies = ({ endpoint, isBookmarked }) => {
   }, [endpoint, isBookmarked, user, isLoading, navigate, setQuery]);
 
   const addBookmarkAction = (mediaId, isMovie) => {
-    addBookmark(mediaId, isMovie, user, setUser);
+    addBookmark(mediaId, isMovie, user, setUser, setBookmarkQuery);
   };
 
   const removeBookmarkAction = (mediaId) => {
-    removeBookmark(mediaId, user, setUser);
+    removeBookmark(mediaId, user, setUser, setBookmarkQuery);
   };
 
   return (
@@ -75,16 +76,36 @@ const Movies = ({ endpoint, isBookmarked }) => {
           return (
             <div key={movie.id} className="w-poster md:w-poster-md xl:w-poster-lg flex flex-col gap-2 relative">
               {isBookmarked ? (
-                <div className="absolute top-4 right-6 cursor-pointer" onClick={() => removeBookmarkAction(movie.id)}>
-                  <BookmarkLogo bookmarked={true} fill={"white"} />
-                </div>
+                bookmarkQuery === movie.id ? (
+                  <div className="absolute top-4 right-6">
+                    <div className="relative w-8 h-8 rounded-full">
+                      <div>
+                        <ClipLoader color="#0064ff" />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="absolute top-4 right-6 cursor-pointer" onClick={() => removeBookmarkAction(movie.id)}>
+                    <BookmarkLogo bookmarked={true} fill={"white"} />
+                  </div>
+                )
               ) : user ? (
-                <div
-                  className="absolute top-4 right-6 cursor-pointer"
-                  onClick={() => addBookmarkAction(movie.id, movie.media_type)}
-                >
-                  <BookmarkLogo />
-                </div>
+                bookmarkQuery === movie.id ? (
+                  <div className="absolute top-4 right-6">
+                    <div className="relative w-8 h-8 rounded-full">
+                      <div>
+                        <ClipLoader color="#0064ff" />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="absolute top-4 right-6 cursor-pointer"
+                    onClick={() => addBookmarkAction(movie.id, movie.media_type)}
+                  >
+                    <BookmarkLogo />
+                  </div>
+                )
               ) : (
                 <Link to={"/login"} className="absolute top-4 right-6 cursor-pointer">
                   <BookmarkLogo />
