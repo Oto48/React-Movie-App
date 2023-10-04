@@ -5,12 +5,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"; // Import the useAuth hook
 
 const AuthForm = ({ isLogin }) => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-  });
+  const [formData, setFormData] = useState(
+    isLogin
+      ? {
+          email: "",
+          password: "",
+        }
+      : {
+          username: "",
+          email: "",
+          password: "",
+          repeatPassword: "",
+        }
+  );
 
   const [formErrors, setFormErrors] = useState({});
   const [invalid, setInvalid] = useState(false);
@@ -87,6 +94,21 @@ const AuthForm = ({ isLogin }) => {
 
   const resetErrors = () => {
     setFormErrors({});
+
+    setFormData(
+      isLogin
+        ? {
+            username: "",
+            email: "",
+            password: "",
+            repeatPassword: "",
+          }
+        : {
+            email: "",
+            password: "",
+          }
+    );
+
     setInvalid(false);
   };
 
